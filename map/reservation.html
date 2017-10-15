@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1 , user-scalable=no">
+	<title>map</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="css/bootstrap-map.css"/>
+
+
+</head>
+<body>
+
+	<!--导航-->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<!--小屏幕导航按钮和logo-->
+			<div class="navbar-header">
+				<a href="index.html" class="navbar-brand">地图管理工具</a>
+			</div>
+			<!--小屏幕导航按钮和logo-->
+			<!--导航-->
+			<div class="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right quit">
+					<li><a href="#">退出</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li class="navbar-nav-home nav-item"><a onclick="home()">首页</a></li>
+					<li class="navbar-nav-jingpin nav-item"><a onclick="jingpin()">精品地图</a></li>
+					<li class="navbar-nav-reserve nav-item active"><a onclick="reserve()">在线预约</a></li>
+				</ul>
+			</div>
+			<!--导航-->
+		</div>
+	</nav>
+	<!--导航-->
+    <div class="container container-top" id="home" style="display: none">
+    首页
+    </div>
+    <div class="container container-top" id="jingpin" style="display: none">
+    精品地图
+    </div>
+	<div class="container container-top" id="reserve">
+		<div class="row">
+			<div class="col-md-2">
+				<div class="list-group">
+					<a onclick="reservation()" class="list-group-item active list-reserve">申请借阅</a>
+					<a onclick="history()" class="list-group-item list-history">借阅记录</a>
+				</div>
+			</div>
+			<div class="col-md-10" id="reservation">
+				<div class="page-header">
+					<h1>申请借阅</h1>
+				</div>
+				<div class="page-form">
+					<h1>中国地质图书馆阅览地图申请表</h1>
+
+					<div class="row">
+						<div class="col-md-6">
+							<div class="group">      
+								<input type="text" class="empty" required>
+								<span class="bar"></span>
+								<label>姓名</label>
+								<p class='prompt'>不能为空</p>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="group">      
+								<input type="text" class="empty" required>
+								<span class="bar"></span>
+								<label>读者卡号(身份证号)</label>
+								<p class='prompt'>不能为空</p>
+							</div>
+						</div>
+					</div>
+					<div class="row ">
+						<div class="col-md-6">
+							<div class="group">      
+								<input type="text" id="ditu" data-toggle="dropdown" required> 
+								<span class="bar"></span>
+								<label>地图</label>
+								<ul class="dropdown-menu map-top">
+									<li class="dropdown-item">Item 1<span class="glyphicon glyphicon-ok right hide" ></span></li>
+									<li class="dropdown-item"><span class="glyphicon glyphicon-ok right hide" ></span>Item 2</li>
+									<li class="dropdown-item selected"><span class="glyphicon glyphicon-ok right" ></span>Item 3</li>
+									<li class="dropdown-item"><span class="glyphicon glyphicon-ok right hide" ></span>Item 4</li>
+									<li class="dropdown-item"><span class="glyphicon glyphicon-ok right hide" ></span>Item 5</li>
+									<li class="dropdown-item"><span class="glyphicon glyphicon-ok right hide" ></span>Item 6</li>
+								</ul>
+								<p class='prompt'>不能为空</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="col-md-4">
+							<div class="group">  
+								<input type="text" class="empty" id="tel" required>
+								<span class="bar"></span>
+								<label>联系电话</label>
+								<p class='prompt'>不能为空</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="group">    
+								<input type="text" id="qq" required>
+								<span class="bar"></span>
+								<label>邮箱(QQ微信)</label>
+								<p class='prompt'>1</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="group">      
+								<input type="text" id="xueli" required>
+								<span class="bar"></span>
+								<label>学历</label>
+								<p class='prompt'></p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<div class="group">      
+								<input type="text"  required>
+								<span class="bar"></span>
+								<label>研究领域</label>
+								<p class='prompt'>1</p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="group">      
+								<input type="text"  required>
+								<span class="bar"></span>
+								<label>职业</label>
+								<p class='prompt'></p>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="group">      
+								<input type="text" class="empty" required>
+								<span class="bar"></span>
+								<label>单位名称</label>
+								<p class='prompt'></p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-11">
+							<p>本地图服务项目</p> 
+							<div role="tablist">
+								<!-- Nav tabs -->
+								<ul class="nav nav-tabs" role="tablist">
+									<li role="presentation" class="active"><a href="#research" aria-controls="research" role="tab" data-toggle="tab" id="proResearch">项目研究</a></li>
+									<li role="presentation"><a href="#unit" aria-controls="unit" role="tab" data-toggle="tab" id="proUse">单位事宜使用</a></li>
+									<li role="presentation"><a href="#study" aria-controls="study" role="tab" data-toggle="tab" id="proStudy"> 个人学习研究</a></li>
+								</ul>
+
+								<!-- Tab panes -->
+								<div class="tab-content">
+									<div role="tabpanel" class="tab-pane active" id="research">
+										<div class="kong"></div>
+										<div class="col-md-4">
+											<div class="group">      
+												<input type="text" class="proClear empty" required>
+												<span class="bar"></span>
+												<label>项目名称</label>
+												<p class='prompt'>不能为空</p>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="group">      
+												<input type="text" class="empty" required>
+												<span class="bar"></span>
+												<label>项目类型</label>
+											</div>
+										</div>
+
+									</div>
+									<div role="tabpanel" class="tab-pane" id="unit"> 
+										<div class="kong"></div>
+										<div class="col-md-4">
+											<div class="group">      
+												<input type="text" class="proClear empty" required>
+												<span class="bar"></span>
+												<label>事宜</label>
+												<p class='prompt'>不能为空</p>
+											</div>
+										</div>
+									</div>
+									<div role="tabpanel" class="tab-pane" id="study">
+										<div class="kong"></div>
+										<div class="col-md-4">
+											<div class="group">      
+												<input type="text" class="proClear empty" required>
+												<span class="bar"></span>
+												<label>研究领域</label>
+												<p class='prompt'>不能为空</p>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="group">
+								<p>具体服务用途说明</p>  
+								<textarea rows="4" cols="85" placeholder="具体服务用途说明"  class="empty"></textarea>
+								<p class='prompt'>不能为空</p>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="group">
+								<p>建议采购的相关图件（需求图件）</p> 
+								<div class="row">
+									<div class="col-md-7">
+										<div class="input-group">
+											<div class="input-group-btn input-btn">
+												<button type="button" class="btn btn-def dropdown-toggle" id='condition' data-toggle="dropdown">条件 <span class="caret" ></span></button>
+												<ul class="dropdown-menu dropdown-menu2">
+													<li class="dropdown-item1">Item 1<span class="glyphicon glyphicon-ok right hide" ></span></li>
+													<li class="dropdown-item1"><span class="glyphicon glyphicon-ok right hide" ></span>Item 2</li>
+													<li class="dropdown-item1 selected"><span class="glyphicon glyphicon-ok right" ></span>Item 3</li>
+													<li class="dropdown-item1"><span class="glyphicon glyphicon-ok right hide" ></span>Item 4</li>
+													<li class="dropdown-item1"><span class="glyphicon glyphicon-ok right hide" ></span>Item 5</li>
+													<li class="dropdown-item1"><span class="glyphicon glyphicon-ok right hide" ></span>Item 6</li>
+												</ul>
+											</div><!-- /btn-group -->
+											<input type="text" id="" required>
+											<span class="bar"></span>               
+											<div class="input-group-btn">
+
+												<button type="button" class="btn btn-default" >搜索</button>
+											</div><!-- /btn-group -->
+										</div><!-- /input-group -->
+									</div><!-- /.col-lg-6 -->
+								</div><!-- /.row -->
+							</div>
+						</div>
+					</div> 
+					<button class="btn color-1 material-design" data-color="#2f5398">提交申请</button>
+
+				</div>
+			</div>
+            <div class="col-md-10" id="history" style="display: none;">
+                <div class="page-header">
+                    <h1>借阅记录</h1>
+                </div>
+            </div>
+        </div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script>
+
+$( ".empty" ).blur(function() {
+	if($(this).val().trim()==''){
+		$(this).css( "border-bottom", "1px solid #ff4343" );
+		$(this).siblings().filter('.prompt').css( "visibility", "visible" );
+	}else{
+		$(this).css( "border-bottom", "1px solid #757575" );
+	}
+});
+$(".empty").focus(function() {
+	$(this).siblings().filter('.prompt').css( "visibility", "hidden" );
+});
+
+$(".proClear").click(function() {
+	let content= $(this).val();
+	$(".proClear").val("");
+	$(".proClear").removeClass('red');
+	$(".proClear").css( "border-bottom", "1px solid #757575");
+	$(this).val(content);
+});
+
+$('.dropdown-item').click(function(){
+	$('#ditu').val($(this).text());
+	$(this).siblings().removeClass('selected');
+	$(this).addClass('selected');
+	$(this).siblings().find('span').addClass('hide');
+	$(this).find('span').removeClass('hide');
+});
+$('.dropdown-item1').click(function(){ 
+	$('#condition').html($(this).text() + '&nbsp<span class="caret" ></span>');
+	$(this).siblings().removeClass('selected');
+	$(this).addClass('selected');
+	$(this).siblings().find('span').addClass('hide');
+	$(this).find('span').removeClass('hide');
+});
+function reservation(){
+	$('#reservation').css("display","block");
+	$('#history').css("display","none");
+	$('.list-history').removeClass("active");
+	$('.list-reserve').addClass("active");
+}
+function history(){
+	$('#reservation').css("display","none");
+	$('#history').css("display","block");
+	$('.list-reserve').removeClass("active");
+	$('.list-history').addClass("active");
+}
+function home(){
+	$('#reserve').css("display","none");
+	$('#jingpin').css("display","none");
+	$('#home').css("display","block");
+	$('.navbar-nav-jingpin').removeClass("active");
+	$('.navbar-nav-reserve').removeClass("active");
+	$('.navbar-nav-home').addClass("active");
+}
+function jingpin(){
+	$('#reserve').css("display","none");
+	$('#jingpin').css("display","block");
+	$('#home').css("display","none");
+	$('.navbar-nav-home').removeClass("active");
+	$('.navbar-nav-reserve').removeClass("active");
+	$('.navbar-nav-jingpin').addClass("active");
+}
+function reserve(){
+	$('#reserve').css("display","block");
+	$('#jingpin').css("display","none");
+	$('#home').css("display","none");
+	$('.navbar-nav-home').removeClass("active");
+	$('.navbar-nav-jingpin').removeClass("active");
+	$('.navbar-nav-reserve').addClass("active");
+}
+$("#ditu").keydown(function( event ) {
+	event.preventDefault();
+});
+
+var canvas = {},
+centerX = 0,
+centerY = 0,
+color = '',
+containers = document.getElementsByClassName('material-design')
+context = {},
+element = {},
+radius = 0,
+
+requestAnimFrame = function () {
+	return (
+		window.requestAnimationFrame       || 
+		window.mozRequestAnimationFrame    || 
+		window.oRequestAnimationFrame      || 
+		window.msRequestAnimationFrame     || 
+		function (callback) {
+			window.setTimeout(callback, 1000 / 60);
+		}
+		);
+} (),
+
+init = function () {
+	containers = Array.prototype.slice.call(containers);
+	for (var i = 0; i < containers.length; i += 1) {
+		canvas = document.createElement('canvas');
+		canvas.addEventListener('click', press, false);
+		containers[i].appendChild(canvas);
+		canvas.style.width ='100%';
+		canvas.style.height='100%';
+		canvas.width  = canvas.offsetWidth;
+		canvas.height = canvas.offsetHeight;
+	}
+},
+
+press = function (event) {
+	color = event.toElement.parentElement.dataset.color;
+	element = event.toElement;
+	context = element.getContext('2d');
+	radius = 0;
+	centerX = event.offsetX;
+	centerY = event.offsetY;
+	context.clearRect(0, 0, element.width, element.height);
+	draw();
+},
+
+draw = function () {
+	context.beginPath();
+	context.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+	context.fillStyle = color;
+	     context.fill();
+	radius += 2;
+	if (radius < element.width) {
+		requestAnimFrame(draw);
+	}
+};
+
+init();
+
+
+</script>
+</body>
+<!--footer-->
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<p>
+					Copyright&nbsp;©&nbsp;2012-2015&nbsp;&nbsp;&nbsp;&nbsp;蜀ICP备13014270号-4
+				</p>
+			</div>
+		</div>
+	</div>
+</footer>
+<!--footer-->
